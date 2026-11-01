@@ -11,3 +11,5 @@ button,select,.file-label{border-radius:16px;background:#fffdf8;border-color:#df
 @media(max-width:550px){.heading>.age{display:none}.heading{min-height:160px}.subtitle .nl{font-size:12px}main{padding:0 18px}#stories{gap:12px}.story-button strong{font-size:16px}.modes button{padding:10px 12px}.modes .nl{display:block;margin:4px 0 0}.header-actions>a{font-size:11px}.quiz-options button{min-height:84px!important}.classroom .heading{align-items:flex-start;gap:10px;flex-direction:column}.classroom h1{font-size:32px}.quiz-section:fullscreen .quiz-options button{font-size:1.2rem}}
 @media(prefers-reduced-motion:reduce){button{transition:none}}
 :root{font-family:ui-rounded,-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif}.heading>.age{padding-top:140px;text-align:center;min-height:185px}.age .nl{padding:2px}@media(max-width:800px){.heading>.age{padding-top:117px;min-height:160px}}
+
+main:not(.classroom)>.heading{min-height:0;padding:24px 0 22px}.guide-foot{justify-content:flex-end}main:not(.classroom)>.heading h1{margin-bottom:0}
