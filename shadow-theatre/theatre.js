@@ -1,0 +1,73 @@
+import { scripts } from './scripts-data.js';
+import { videos } from './videos.js?v=2';
+import { translations } from './languages.js';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const ids=['race','crow','farmer','fox','nezha'];
+
+let showFrench=false;
+let selected=ids.includes(location.hash.slice(1))?location.hash.slice(1):'race';
+let player=null,ready=false,loading=false,generation=0,cueIndex=0,stageIndex=0,toastTimer,apiPromise,localUrl;
+function read(key,fallback){try{return localStorage.getItem(key)??fallback}catch{return fallback}}
+function save(key,value){try{localStorage.setItem(key,value)}catch{toast('浏览器未允许保存，这次输入仍可继续使用。')}}
+let language=read('ce-shadow-language','nl');
+if(!['nl','en','fr'].includes(language))language='nl';
+const translatedNodes=new WeakMap();
+function translate(){document.querySelectorAll('.nl').forEach(el=>{if(el.querySelector('.nl'))return;let original=translatedNodes.get(el);if(!original||el.textContent!==original.shown)original={source:el.textContent,shown:el.textContent};const source=original.source.trim(), pair=translations[source];const shown=language==='nl'?original.source:pair?pair[language==='en'?0:1]:original.source;if(el.textContent!==shown)el.textContent=shown;original.shown=shown;translatedNodes.set(el,original);el.lang=language==='nl'?'nl-BE':language==='fr'?'fr-BE':'en';});}
+let nl=read('ce-shadow-nl','true')==='true',py=read('ce-shadow-py','true')==='true';
+function toast(s){$('toast').textContent=s;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').textContent='',4500)}
+function preferences(){translate();document.body.classList.toggle('no-nl',!nl);document.body.classList.toggle('show-py',py);$('nl-toggle').setAttribute('aria-pressed',nl);$('nl-toggle').textContent=nl?'辅助译文 ✓':'辅助译文';$('py-toggle').setAttribute('aria-pressed',py)}
+$('nl-toggle').onclick=()=>{nl=!nl;save('ce-shadow-nl',String(nl));preferences()};
+$('py-toggle').onclick=()=>{py=!py;save('ce-shadow-py',String(py));preferences()};preferences();
+$('language').value=language;$('language').onchange=e=>{language=e.target.value;save('ce-shadow-language',language);translate();updateFrench()};
+const translationObserver=new MutationObserver(translate);translationObserver.observe(document.body,{childList:true,subtree:true,characterData:true});
+function format(t){return `${Math.floor(t/60).toString().padStart(2,'0')}:${Math.floor(t%60).toString().padStart(2,'0')}`}
+function setCue(index){const v=videos[selected];cueIndex=Math.max(0,Math.min(v.cues.length-1,index));const c=v.cues[cueIndex];$('cue-zh').textContent=c[1];$('cue-py').textContent=c[3]||'';$('cue-nl').textContent=c[2];$('prev-cue').disabled=cueIndex===0;$('next-cue').disabled=cueIndex===v.cues.length-1;document.querySelectorAll('.cue-button').forEach((el,i)=>{el.classList.toggle('active',i===cueIndex);el.setAttribute('aria-pressed',i===cueIndex)});updateFrench()}
+function pause(){if(ready)player.pauseVideo()}
+function stopSpeech(){if('speechSynthesis' in window)window.speechSynthesis.cancel()}
+function mode(act){$('watch-panel').hidden=act;$('act-panel').hidden=!act;$('watch-tab').setAttribute('aria-selected',!act);$('act-tab').setAttribute('aria-selected',act);if(act)pause();else stopSpeech()}
+$('watch-tab').onclick=()=>mode(false);$('act-tab').onclick=()=>mode(true);$('start-act').onclick=()=>mode(true);
+function render(){generation++;if(localUrl){URL.revokeObjectURL(localUrl);localUrl=null;}if(player){try{player.destroy()}catch{}}player=null;ready=false;loading=false;stopSpeech();const s=scripts[selected],v=videos[selected];
+$('stories').innerHTML=ids.map((id,i)=>`<button class="story-button" data-story="${id}" aria-pressed="${id===selected}"><span class="num">0${i+1}</span><img class="story-cover" src="./images/${id}-cover.jpg" alt="${scripts[id].title}视频封面"><strong>${scripts[id].title}</strong><span class="nl" lang="nl-BE">${scripts[id].nl}</span></button>`).join('');
+$('title').textContent=s.title;$('story-nl').textContent=s.nl;$('summary').textContent=s.summary;$('summary-nl').textContent=s.summaryNl;$('question').textContent=s.question;$('question-nl').textContent=s.questionNl;
+$('roles').innerHTML=s.roles.map(r=>`<div class="role-card"><span>${r.zh}</span><small class="nl" lang="nl-BE">${r.nl}</small></div>`).join('');
+$('video-shell').innerHTML=`<div id="player"></div><button class="load-video" id="load-video" aria-label="播放${s.title}中文视频"><img src="./images/${selected}-cover.jpg" alt="${s.title}视频封面"><span>▶ 播放中文故事</span></button>`;
+$('load-video').onclick=()=>loadVideo(v.start);$('youtube').href=new URLSearchParams(location.search).has('offline')?`./media/${selected}.mp4`:`https://www.youtube.com/watch?v=${v.id}`;$('source').textContent=`${v.publisher} · ${v.label} · YouTube 原视频播放器`;$('video-note').textContent=v.note;$('player-status').textContent='';$('speed').value='1';$('time').textContent=format(v.start);
+$('cues').innerHTML=v.cues.map((c,i)=>`<button class="cue-button" data-cue="${i}"><time>${format(c[0])}</time><span class="py">${esc(c[3]||'')}</span>${esc(c[1])}<span class="nl" lang="nl-BE">${esc(c[2])}</span></button>`).join('');setCue(0);
+$('role-filter').innerHTML='<option value="">全部角色 · Alle rollen</option>'+s.roles.map(r=>`<option value="${r.zh}">${r.zh} · ${r.nl}</option>`).join('');renderLines();$('idea').value=read(`ce-shadow-idea-${selected}`,'');$('adaptation-note').textContent=selected==='nezha'?'自编温和版：用现有哪吒与龙王影偶演出合作故事，可自由改编。':selected==='farmer'?'课堂轻松改编：兔子休息后离开，与原视频的结局细节不同。':selected==='crow'?'表演使用奶酪（小纸片），可替换成视频里的肉。':'';
+translate();mode(false);history.replaceState(null,'',`#${selected}`)}
+$('stories').onclick=e=>{const b=e.target.closest('[data-story]');if(b){selected=b.dataset.story;render()}};
+$('cues').onclick=e=>{const b=e.target.closest('[data-cue]');if(b)seekCue(Number(b.dataset.cue))};
+function seekCue(i){setCue(i);const t=videos[selected].cues[cueIndex][0];$('time').textContent=format(t);if(ready){player.seekTo(t,true);player.pauseVideo()}else if(!player){$('player-status').textContent='正在预读导读。点击视频可开始同步播放。'}}
+$('prev-cue').onclick=()=>seekCue(cueIndex-1);$('next-cue').onclick=()=>seekCue(cueIndex+1);
+function api(){if(window.YT?.Player)return Promise.resolve();if(!apiPromise)apiPromise=new Promise((resolve,reject)=>{window.onYouTubeIframeAPIReady=resolve;const script=document.createElement('script');script.src='https://www.youtube.com/iframe_api';script.onerror=()=>{apiPromise=null;reject(new Error('network'))};document.head.append(script)});return apiPromise}
+async function loadVideo(start){if(loading||player)return;if(new URLSearchParams(location.search).has('offline')){openLocal(`./media/${selected}.mp4`);return;}loading=true;const token=generation,v=videos[selected];$('player-status').textContent='正在连接 YouTube…';try{await api();if(token!==generation)return;const overlay=$('load-video');if(overlay)overlay.remove();player=new YT.Player('player',{host:'https://www.youtube-nocookie.com',videoId:v.id,playerVars:{playsinline:1,rel:0,cc_load_policy:1,cc_lang_pref:'zh-Hans',start, end:v.end,origin:location.origin},events:{onReady:event=>{if(token!==generation)return;ready=true;$('player-status').textContent='';event.target.playVideo()},onError:()=>{$('player-status').textContent='此视频暂时无法嵌入播放。请点“在 YouTube 打开”；下方导读和排练仍可使用。'}}});}catch{loading=false;$('player-status').textContent='YouTube 暂时无法连接。可在 YouTube 打开视频，或直接阅读导读、排练台词。'}}
+setInterval(()=>{if(!ready||!player)return;const t=player.getCurrentTime();if(!Number.isFinite(t))return;const v=videos[selected];$('time').textContent=format(t);let i=0;for(let j=0;j<v.cues.length;j++)if(t>=v.cues[j][0])i=j;if(i!==cueIndex||$('cue-zh').textContent!==v.cues[i][1])setCue(i);if(t<v.cues[i][0]||t>=v.cues[i][4]){$('cue-zh').textContent='';$('cue-py').textContent='';$('cue-nl').textContent='';$('cue-fr').textContent='';}if(t>=v.end&&player.getPlayerState()===1){player.pauseVideo();$('player-status').textContent='片段结束。现在可以分角色演一演。'}},250);
+$('replay').onclick=()=>{const v=videos[selected];if(ready){player.seekTo(v.start,true);player.playVideo();$('player-status').textContent=''}else if(!player)loadVideo(v.start)};
+$('pause').onclick=()=>{if(!ready){if(!player)loadVideo(videos[selected].start);return}player.getPlayerState()===1?player.pauseVideo():player.playVideo()};
+$('speed').onchange=e=>{if(ready){const rate=Number(e.target.value);if(player.getAvailablePlaybackRates().includes(rate))player.setPlaybackRate(rate);else{e.target.value='1';toast('这个视频暂不支持此速度。')}}};
+function renderLines(){const s=scripts[selected],filter=$('role-filter').value;$('lines').innerHTML=s.lines.map((l,i)=>{if(filter&&l.role!==filter)return '';const r=s.roles.find(r=>r.zh===l.role);return `<article class="line"><div class="line-role">${l.role}<small class="nl">${r?.nl||''}</small></div><div><p class="py">${esc(l.py)}</p><p class="zh">${esc(l.zh)}</p><p class="nl" lang="nl-BE">${esc(l.nl)}</p><div class="action">${esc(l.action)} <span class="nl">${esc(l.actionNl)}</span></div></div><button data-speak="${i}" aria-label="朗读${esc(l.zh)}">▶ 听一句</button></article>`}).join('')}
+$('role-filter').onchange=renderLines;$('lines').onclick=e=>{const b=e.target.closest('[data-speak]');if(b)speak(scripts[selected].lines[Number(b.dataset.speak)].zh)};
+function speak(text,lang="zh-CN"){if(!text)return;pause();if(!('speechSynthesis' in window)){toast('此浏览器不支持朗读，请跟着老师读。');return}stopSpeech();const u=new SpeechSynthesisUtterance(text);u.lang=lang;u.rate=.8;const voices=speechSynthesis.getVoices();const voice=voices.find(v=>v.lang===lang)||voices.find(v=>v.lang.startsWith(lang.slice(0,2)));if(voice)u.voice=voice;u.onerror=()=>toast('朗读暂不可用，请跟着老师读。');speechSynthesis.speak(u)}
+$('idea').oninput=e=>save(`ce-shadow-idea-${selected}`,e.target.value);
+$('print').onclick=()=>window.print();$('intro-close').onclick=()=>$('intro-dialog').close();
+function stageLines(){const filter=$('role-filter').value;return scripts[selected].lines.filter(l=>!filter||l.role===filter)}
+function stageRender(){const lines=stageLines();stageIndex=Math.max(0,Math.min(lines.length-1,stageIndex));const l=lines[stageIndex],r=scripts[selected].roles.find(r=>r.zh===l.role);$('stage-image').src=`./images/${selected}-${scripts[selected].lines.indexOf(l)}.jpg`;$('stage-story').textContent=scripts[selected].title;$('stage-role').textContent=`${l.role}`;$('stage-zh').textContent=l.zh;$('stage-nl').textContent=l.nl;$('stage-py').textContent=l.py;const actionTranslation=language==='nl'?l.actionNl:translations[l.actionNl]?.[language==='en'?0:1];$('stage-action').textContent=nl?`${l.action} · ${actionTranslation||''}`:l.action;$('stage-count').textContent=`${stageIndex+1} / ${lines.length}`;$('stage-prev').disabled=stageIndex===0;$('stage-next').disabled=stageIndex===lines.length-1;updateFrench();stopSpeech()}
+$('stage-open').onclick=()=>{pause();stageIndex=0;stageRender();$('stage').showModal()};$('stage-close').onclick=()=>$('stage').close();$('stage').addEventListener('close',stopSpeech);$('stage-prev').onclick=()=>{stageIndex--;stageRender()};$('stage-next').onclick=()=>{stageIndex++;stageRender()};$('stage-speak').onclick=()=>speak(stageLines()[stageIndex].zh);
+$('stage').addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();stageIndex++;stageRender()}if(e.key==='ArrowLeft'){e.preventDefault();stageIndex--;stageRender()}if(e.code==='Space'){e.preventDefault();speak(stageLines()[stageIndex].zh)}});
+window.addEventListener('hashchange',()=>{if(ids.includes(location.hash.slice(1))){selected=location.hash.slice(1);render()}});render();
+$('speak-cue').onclick=()=>speak($('cue-zh').textContent);
+function openLocal(src){
+ generation++;if(player){try{player.destroy()}catch{}}
+ $('video-shell').innerHTML='<video id="offline-player" controls playsinline></video>';
+ const media=$('offline-player');media.src=src;ready=false;loading=false;
+ player={pauseVideo:()=>media.pause(),playVideo:()=>media.play().catch(()=>toast('请点击视频上的播放键。')),seekTo:t=>{media.currentTime=t},getCurrentTime:()=>media.currentTime,getPlayerState:()=>media.paused?2:1,getAvailablePlaybackRates:()=>[.75,1],setPlaybackRate:r=>{media.playbackRate=r},destroy:()=>{media.pause();media.removeAttribute('src');media.load()}};
+ media.onloadedmetadata=()=>{ready=true;media.currentTime=Math.min(videos[selected].start,media.duration);$('player-status').textContent='本地播放 · 无需网络';player.playVideo()};
+ media.onerror=()=>{$('player-status').textContent='文件无法播放。请用“打开本地视频”选择当前故事的同一完整原视频（MP4）。'};
+}
+$('local-video').onchange=event=>{const file=event.target.files[0];if(!file)return;if(!file.type.startsWith('video/')){toast('请选择视频文件。');return}if(localUrl)URL.revokeObjectURL(localUrl);localUrl=URL.createObjectURL(file);openLocal(localUrl);event.target.value=''};
+
+$('speak-translation').onclick=()=>speak($('cue-nl').textContent,{nl:'nl-BE',fr:'fr-BE',en:'en-GB'}[language]);
+$('fr-toggle').onclick=()=>{showFrench=!showFrench;$('fr-toggle').setAttribute('aria-pressed',showFrench);updateFrench()};
+function updateFrench(){const c=videos[selected].cues[cueIndex];$('cue-fr').textContent=c?.[6]||'';$('cue-fr').hidden=!showFrench||language==='fr';const l=stageLines()[stageIndex];$('stage-fr').textContent=translations[l?.nl]?.[1]||'';$('stage-fr').hidden=!showFrench||language==='fr'}
+if(new URLSearchParams(location.search).has('offline')){document.querySelector('.intro-link').href='./intro.html?offline=1';}
