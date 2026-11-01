@@ -23,3 +23,9 @@ Pinyin follows word-based spelling and lexical tone marks; 一/不 are generally
 The application code and original classroom scripts are MIT licensed (see LICENSE). Embedded videos, short quoted subtitles/translations, video thumbnails, video stills, and publisher marks remain third-party material and are excluded from that license. Source video IDs and publishers appear in `videos.js`; do not treat an MIT code license as a license to redistribute full videos.
 
 The introduction diagram is original SVG. General cultural reference: https://ich.unesco.org/en/RL/chinese-shadow-puppetry-00421
+
+## Classroom activities
+
+Each story has 10 original multiple-choice questions in a separate Quiz tab. The first two refer to the timed excerpt; the remaining questions cover the full story or adapted performance script. Feedback sounds are synthesized locally and can be muted. Fullscreen viewing includes subtitles below the video; stage pages show up to four dialogue lines with speaker portraits.
+
+`classroom.html` offers date-based attendance, random selection without repetition, points, undo, and JSON backup/import. The public app ships with no student roster. Only names and attendance dates should be imported locally; no spreadsheet credentials, contact or health data are used. Scores remain in that browser and are not synced to Google Sheets.
