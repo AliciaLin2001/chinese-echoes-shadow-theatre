@@ -70,11 +70,11 @@ export const videos = {
       [
         40.75,
         "“你应该注意路上的其他人。”乌龟责备道。",
-        "“Je moet op de anderen op de weg letten” zegt de schildpad streng.",
+        "“Je moet op de anderen op de weg letten”, zegt de schildpad streng.",
         "“Nǐ yīnggāi zhùyì lù shàng de qítā rén.” wūguī zébèi dào.",
         47.17,
-        "“You should watch out for others on the path” the tortoise scolds.",
-        "“Tu devrais faire attention aux autres sur le chemin” reproche la tortue."
+        "“You should watch out for others on the path,” the tortoise scolds.",
+        "“Tu devrais faire attention aux autres sur le chemin”, reproche la tortue."
       ],
       [
         47.73,
@@ -124,20 +124,20 @@ export const videos = {
       [
         69.55,
         "“这条路每个人都可以走。”乌龟说。",
-        "“Iedereen mag over deze weg lopen” zegt de schildpad.",
+        "“Iedereen mag over deze weg lopen”, zegt de schildpad.",
         "“Zhè tiáo lù měi gè rén dōu kěyǐ zǒu.” wūguī shuō.",
         73.29,
-        "“Everyone may use this path” says the tortoise.",
-        "“Tout le monde peut emprunter ce chemin” dit la tortue."
+        "“Everyone may use this path,” says the tortoise.",
+        "“Tout le monde peut emprunter ce chemin”, dit la tortue."
       ],
       [
         74.43,
         "“我来告诉你。”兔子挑衅道。",
-        "“Ik zal je eens iets vertellen” daagt de haas hem uit.",
+        "“Ik zal je eens iets vertellen”, daagt de haas hem uit.",
         "“Wǒ lái gàosu nǐ.” tùzi tiǎoxìn dào.",
         77.87,
-        "“Let me tell you something” the hare challenges him.",
-        "“Je vais te dire quelque chose” le provoque le lièvre."
+        "“Let me tell you something,” the hare challenges him.",
+        "“Je vais te dire quelque chose”, le provoque le lièvre."
       ],
       [
         78.55,
@@ -160,11 +160,11 @@ export const videos = {
       [
         89.94,
         "“好的。”乌龟同意道。",
-        "“Goed” stemt de schildpad in.",
+        "“Goed”, stemt de schildpad in.",
         "“Hǎo de.” wūguī tóngyì dào.",
         92.8,
-        "“All right” the tortoise agrees.",
-        "“D’accord” accepte la tortue."
+        "“All right,” the tortoise agrees.",
+        "“D’accord”, accepte la tortue."
       ],
       [
         93.84,
@@ -205,11 +205,11 @@ export const videos = {
       [
         110.3,
         "“现在取消比赛还来得及。”兔子小声对乌龟说。",
-        "“Je kunt de wedstrijd nu nog afzeggen” fluistert de haas tegen de schildpad.",
+        "“Je kunt de wedstrijd nu nog afzeggen”, fluistert de haas tegen de schildpad.",
         "“Xiànzài qǔxiāo bǐsài hái lái de jí.” tùzi xiǎoshēng duì wūguī shuō.",
         116.8,
-        "“It's not too late to cancel the race” the hare whispers to the tortoise.",
-        "“Il est encore temps d’annuler la course” chuchote le lièvre à la tortue."
+        "“It's not too late to cancel the race,” the hare whispers to the tortoise.",
+        "“Il est encore temps d’annuler la course”, chuchote le lièvre à la tortue."
       ],
       [
         117.82,
@@ -349,11 +349,11 @@ export const videos = {
       [
         186.39,
         "“我饱了。”他说。",
-        "“Ik heb genoeg gegeten” zegt hij.",
+        "“Ik heb genoeg gegeten”, zegt hij.",
         "“Wǒ bǎo le.” tā shuō.",
         188.91,
-        "“I'm full” he says.",
-        "“Je n’ai plus faim” dit-il."
+        "“I'm full,” he says.",
+        "“Je n’ai plus faim”, dit-il."
       ],
       [
         189.71,
