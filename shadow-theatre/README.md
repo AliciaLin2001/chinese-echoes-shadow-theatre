@@ -26,6 +26,12 @@ The introduction diagram is original SVG. General cultural reference: https://ic
 
 ## Classroom activities
 
-Each story has 10 original multiple-choice questions in a separate Quiz tab. The first two refer to the timed excerpt; the remaining questions cover the full story or adapted performance script. Feedback sounds are synthesized locally and can be muted. Fullscreen viewing includes subtitles below the video; stage pages show up to four dialogue lines with speaker portraits.
+Each story has 10 original multiple-choice questions in a separate Quiz tab. The first two refer to the timed excerpt; the remaining questions cover the full story or adapted performance script. Feedback sounds are synthesized locally and can be muted. Fullscreen viewing includes subtitles below the video; stage pages show three dialogue lines per scene across five scenes with speaker portraits.
 
 `classroom.html` offers date-based attendance, random selection without repetition, points, undo, and JSON backup/import. The public app ships with no student roster. Only names and attendance dates should be imported locally; no spreadsheet credentials, contact or health data are used. Scores remain in that browser and are not synced to Google Sheets.
+
+Stage accompaniment is an original synthesized pentatonic loop (`music.js`), available offline, with three moods, volume control, speech ducking, and automatic stop on closing or hiding the page. `stage-scenes.js` adds original rehearsal lines and translations; they are not quotes from the videos. The narrator avatar was generated with the built-in image tool; the school seal is used only on this activity page and remains the school’s mark.
+
+The introduction now uses the 34-second `Chinese Shadow Puppetry How-To (HD)` demonstration by NORULES CHANNEL (`emf2eon5suQ`). Its six multilingual cues are original action guidance aligned to the image, not a transcript of the source audio. Teacher notes are collapsed. The offline package also supports `media/intro.mp4`.
+
+The rehearsal player offers six original short looping scores with distinct tempos and note patterns. Stage action cues are translated and each line can be read in Chinese or the selected auxiliary language.

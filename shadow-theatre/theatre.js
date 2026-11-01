@@ -1,3 +1,5 @@
+import {setMusic,stopMusic,musicVolume,musicMood,musicDuck} from './music.js?v=2';
+import {expandScenes,sceneNames,scenePhotos} from './stage-scenes.js';
 import { feedbackSound } from './sounds.js';
 import { scripts } from './scripts-data.js';
 import { videos } from './videos.js?v=2';
@@ -5,10 +7,14 @@ import { translations } from './languages.js';
 import { quizzes } from './quiz-data.js';
 import { addQuestions } from './quiz-more.js';
 addQuestions(quizzes);
+expandScenes(scripts,translations);
+translations["Loten en punten"]=["Draw names and score","Tirage et points"];
+let musicEnabled=false;
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const ids=['race','crow','farmer','fox','nezha'];
 
+let activeMode="watch";
 let showFrench=false,pollMode=false,answers={},quizIndex=0,quizSound=true;
 let selected=ids.includes(location.hash.slice(1))?location.hash.slice(1):'race';
 let player=null,ready=false,loading=false,generation=0,cueIndex=0,stageIndex=0,toastTimer,apiPromise,localUrl;
@@ -28,8 +34,8 @@ const translationObserver=new MutationObserver(translate);translationObserver.ob
 function format(t){return `${Math.floor(t/60).toString().padStart(2,'0')}:${Math.floor(t%60).toString().padStart(2,'0')}`}
 function setCue(index){const v=videos[selected];cueIndex=Math.max(0,Math.min(v.cues.length-1,index));const c=v.cues[cueIndex];$('cue-zh').textContent=c[1];$('cue-py').textContent=c[3]||'';$('cue-nl').textContent=c[2];$('prev-cue').disabled=cueIndex===0;$('next-cue').disabled=cueIndex===v.cues.length-1;document.querySelectorAll('.cue-button').forEach((el,i)=>{el.classList.toggle('active',i===cueIndex);el.setAttribute('aria-pressed',i===cueIndex)});updateFrench()}
 function pause(){if(ready)player.pauseVideo()}
-function stopSpeech(){if('speechSynthesis' in window)window.speechSynthesis.cancel()}
-function mode(view){const active=view===true?'act':view===false?'watch':view;for(const name of ['watch','act','quiz']){$(name==='quiz'?'quiz-section':name+'-panel').hidden=name!==active;$(name+'-tab').setAttribute('aria-selected',name===active)}if(active!=='watch')pause();stopSpeech();}
+function stopSpeech(){musicDuck(false);if('speechSynthesis' in window)window.speechSynthesis.cancel()}
+function mode(view){const active=view===true?'act':view===false?'watch':view;activeMode=active;for(const name of ['watch','act','quiz']){$(name==='quiz'?'quiz-section':name+'-panel').hidden=name!==active;$(name+'-tab').setAttribute('aria-selected',name===active)}if(active!=='watch')pause();stopSpeech();}
 $('watch-tab').onclick=()=>mode('watch');$('act-tab').onclick=()=>mode('act');$('quiz-tab').onclick=()=>mode('quiz');$('start-act').onclick=()=>mode('act');
 
 function render(){quizIndex=0;document.body.classList.toggle('burned-captions',selected==='crow');generation++;if(localUrl){URL.revokeObjectURL(localUrl);localUrl=null;}if(player){try{player.destroy()}catch{}}player=null;ready=false;loading=false;stopSpeech();const s=scripts[selected],v=videos[selected];
@@ -40,7 +46,7 @@ $('video-shell').innerHTML=`<div id="player"></div><button class="load-video" id
 $('load-video').onclick=()=>loadVideo(v.start);$('youtube').href=new URLSearchParams(location.search).has('offline')?`./media/${selected}.mp4`:`https://www.youtube.com/watch?v=${v.id}`;$('source').textContent=`${v.publisher} · ${v.label} · YouTube 原视频播放器`;$('video-note').textContent=v.note;$('player-status').textContent='';$('speed').value='1';$('time').textContent=format(v.start);
 $('cues').innerHTML=v.cues.map((c,i)=>`<button class="cue-button" data-cue="${i}"><time>${format(c[0])}</time><span class="py">${esc(c[3]||'')}</span>${esc(c[1])}<span class="nl" lang="nl-BE">${esc(c[2])}</span></button>`).join('');setCue(0);
 $('role-filter').innerHTML='<option value="">全部角色 · Alle rollen</option>'+s.roles.map(r=>`<option value="${r.zh}">${r.zh} · ${r.nl}</option>`).join('');renderLines();$('idea').value=read(`ce-shadow-idea-${selected}`,'');$('adaptation-note').textContent=selected==='nezha'?'自编温和版：用现有哪吒与龙王影偶演出合作故事，可自由改编。':selected==='farmer'?'课堂轻松改编：兔子休息后离开，与原视频的结局细节不同。':selected==='crow'?'表演使用奶酪（小纸片），可替换成视频里的肉。':'';
-renderQuiz();$('quiz-answer').value=read(`ce-shadow-discussion-${selected}`,'');$('quiz-open').textContent=s.question;$('quiz-open-nl').textContent=s.questionNl;translate();mode(false);history.replaceState(null,'',`#${selected}`)}
+renderQuiz();$('quiz-answer').value=read(`ce-shadow-discussion-${selected}`,'');$('quiz-open').textContent=s.question;$('quiz-open-nl').textContent=s.questionNl;translate();mode(activeMode);history.replaceState(null,'',`#${selected}`)}
 $('stories').onclick=e=>{const b=e.target.closest('[data-story]');if(b){selected=b.dataset.story;render()}};
 $('cues').onclick=e=>{const b=e.target.closest('[data-cue]');if(b)seekCue(Number(b.dataset.cue))};
 function seekCue(i){setCue(i);const t=videos[selected].cues[cueIndex][0];$('time').textContent=format(t);if(ready){player.seekTo(t,true);player.pauseVideo()}else if(!player){$('player-status').textContent='正在预读导读。点击视频可开始同步播放。'}}
@@ -53,16 +59,14 @@ $('pause').onclick=()=>{if(!ready){if(!player)loadVideo(videos[selected].start);
 $('speed').onchange=e=>{if(ready){const rate=Number(e.target.value);if(player.getAvailablePlaybackRates().includes(rate))player.setPlaybackRate(rate);else{e.target.value='1';toast('这个视频暂不支持此速度。')}}};
 function renderLines(){const s=scripts[selected],filter=$('role-filter').value;$('lines').innerHTML=s.lines.map((l,i)=>{if(filter&&l.role!==filter)return '';const r=s.roles.find(r=>r.zh===l.role);return `<article class="line"><div class="line-role">${l.role}<small class="nl">${r?.nl||''}</small></div><div><p class="py">${esc(l.py)}</p><p class="zh">${esc(l.zh)}</p><p class="nl" lang="nl-BE">${esc(l.nl)}</p><div class="action">${esc(l.action)} <span class="nl">${esc(l.actionNl)}</span></div></div><button data-speak="${i}" aria-label="朗读${esc(l.zh)}">▶ 听一句</button></article>`}).join('')}
 $('role-filter').onchange=renderLines;$('lines').onclick=e=>{const b=e.target.closest('[data-speak]');if(b)speak(scripts[selected].lines[Number(b.dataset.speak)].zh)};
-function speak(text,lang="zh-CN"){if(!text)return;pause();if(!('speechSynthesis' in window)){toast('此浏览器不支持朗读，请跟着老师读。');return}stopSpeech();const u=new SpeechSynthesisUtterance(text);u.lang=lang;u.rate=.8;const voices=speechSynthesis.getVoices();const voice=voices.find(v=>v.lang===lang)||voices.find(v=>v.lang.startsWith(lang.slice(0,2)));if(voice)u.voice=voice;u.onerror=()=>toast('朗读暂不可用，请跟着老师读。');speechSynthesis.speak(u)}
+function speak(text,lang="zh-CN"){if(!text)return;pause();if(!('speechSynthesis' in window)){toast('此浏览器不支持朗读，请跟着老师读。');return}stopSpeech();const u=new SpeechSynthesisUtterance(text);u.lang=lang;u.rate=.8;const voices=speechSynthesis.getVoices();const voice=voices.find(v=>v.lang===lang)||voices.find(v=>v.lang.startsWith(lang.slice(0,2)));if(voice)u.voice=voice;u.onstart=()=>musicDuck(true);u.onend=()=>musicDuck(false);u.onerror=()=>{musicDuck(false);toast('朗读暂不可用，请跟着老师读。')};speechSynthesis.speak(u)}
 $('idea').oninput=e=>save(`ce-shadow-idea-${selected}`,e.target.value);
 $('print').onclick=()=>window.print();$('intro-close').onclick=()=>$('intro-dialog').close();
 function stageLines(){return scripts[selected].lines}
-function roleImage(role){if(role==='旁白')return './images/narrator.svg';if(selected==='farmer'&&role==='兔子')return './images/rabbit.svg';return `./images/${selected}-role-${scripts[selected].roles.findIndex(r=>r.zh===role)}.jpg`}
-const sceneNames={race:['准备比赛','快与慢','到达终点'],crow:['狐狸来了','甜言蜜语','食物掉了'],farmer:['田里的相遇','坐下来等','重新想一想'],fox:['狐狸的主意','跟我走','大家怕谁'],nezha:['海边的风浪','一起想办法','海面平静了']};
-const scenePhotos={race:[3,6,8],crow:[1,5,8],farmer:[0,6,9],fox:[0,5,8],nezha:[0,4,8]};
-function stageRender(){const all=stageLines();const total=Math.ceil(all.length/4);stageIndex=Math.max(0,Math.min(total-1,stageIndex));$('stage-image').src=`./images/${selected}-${scenePhotos[selected][stageIndex]}.jpg`;$('stage-story').textContent=`${scripts[selected].title} · ${sceneNames[selected][stageIndex]}`;$('stage-dialogues').innerHTML=all.slice(stageIndex*4,stageIndex*4+4).map((l,i)=>`<article class="stage-line"><div class="stage-speaker"><img src="${roleImage(l.role)}" alt="${l.role}"><strong>${l.role}</strong></div><div><p class="py">${esc(l.py)}</p><p class="stage-line-zh">${esc(l.zh)}</p><p class="nl">${esc(l.nl)}</p><p class="stage-fr extra-fr" ${showFrench&&language!=='fr'?'':'hidden'}>${esc(translations[l.nl]?.[1]||'')}</p><small class="stage-action">${esc(l.action)}</small></div><button data-stage-speak="${stageIndex*4+i}" aria-label="朗读${esc(l.zh)}">▶</button></article>`).join('');$('stage-count').textContent=`第 ${stageIndex+1} 幕 / ${total}`;$('stage-prev').disabled=stageIndex===0;$('stage-next').disabled=stageIndex===total-1;translate();stopSpeech()}
-$('stage-open').onclick=()=>{pause();stageIndex=0;stageRender();$('stage').showModal()};$('stage-close').onclick=()=>$('stage').close();$('stage').addEventListener('close',stopSpeech);$('stage-prev').onclick=()=>{stageIndex--;stageRender()};$('stage-next').onclick=()=>{stageIndex++;stageRender()};
-$('stage-dialogues').onclick=e=>{const b=e.target.closest('[data-stage-speak]');if(b)speak(stageLines()[Number(b.dataset.stageSpeak)].zh)};
+function roleImage(role){if(role==='旁白')return './images/narrator.png';if(selected==='farmer'&&role==='兔子')return './images/rabbit.svg';return `./images/${selected}-role-${scripts[selected].roles.findIndex(r=>r.zh===role)}.jpg`}
+function stageRender(){const all=stageLines();const total=Math.ceil(all.length/3);stageIndex=Math.max(0,Math.min(total-1,stageIndex));$('stage-image').src=`./images/${selected}-${scenePhotos[selected][stageIndex]}.jpg`;$('stage-story').textContent=`${scripts[selected].title} · ${sceneNames[selected][stageIndex]}`;$('stage-dialogues').innerHTML=all.slice(stageIndex*3,stageIndex*3+3).map((l,i)=>`<article class="stage-line"><div class="stage-speaker"><img src="${roleImage(l.role)}" alt="${l.role}"><strong>${l.role}</strong></div><div><p class="py">${esc(l.py)}</p><p class="stage-line-zh">${esc(l.zh)}</p><p class="nl">${esc(l.nl)}</p><p class="stage-fr extra-fr" ${showFrench&&language!=='fr'?'':'hidden'}>${esc(translations[l.nl]?.[1]||'')}</p><small class="stage-action">${esc(l.action)}<span class="nl">${esc(l.actionNl)}</span></small></div><div class="stage-audio"><button data-stage-speak="${stageIndex*3+i}" aria-label="朗读中文：${esc(l.zh)}">▶</button><button data-stage-translation="${stageIndex*3+i}" aria-label="朗读译文">${language.toUpperCase()}</button></div></article>`).join('');$('stage-count').textContent=`第 ${stageIndex+1} 幕 / ${total}`;$('stage-prev').disabled=stageIndex===0;$('stage-next').disabled=stageIndex===total-1;translate();stopSpeech()}
+$('stage-open').onclick=()=>{pause();stageIndex=0;stageRender();$('stage').showModal()};$('stage-close').onclick=()=>$('stage').close();$('stage').addEventListener('close',()=>{stopSpeech();stopStageMusic()});$('stage-prev').onclick=()=>{stageIndex--;stageRender()};$('stage-next').onclick=()=>{stageIndex++;stageRender()};
+$('stage-dialogues').onclick=e=>{const translated=e.target.closest('[data-stage-translation]');if(translated){const l=stageLines()[Number(translated.dataset.stageTranslation)];speak(language==='nl'?l.nl:translations[l.nl]?.[language==='en'?0:1]||l.nl,{nl:'nl-BE',en:'en-GB',fr:'fr-BE'}[language]);return}const b=e.target.closest('[data-stage-speak]');if(b)speak(stageLines()[Number(b.dataset.stageSpeak)].zh)};
 $('stage').addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();stageIndex++;stageRender()}if(e.key==='ArrowLeft'){e.preventDefault();stageIndex--;stageRender()}});
 window.addEventListener('hashchange',()=>{if(ids.includes(location.hash.slice(1))){selected=location.hash.slice(1);render()}});render();
 $('speak-cue').onclick=()=>speak($('cue-zh').textContent);
@@ -98,3 +102,9 @@ $('quiz-sound').onclick=()=>{quizSound=!quizSound;$('quiz-sound').setAttribute('
 $('quiz-fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await $('quiz-section').requestFullscreen()}catch{toast('此浏览器不支持全屏，请放大浏览器窗口。')}};
 
 if(new URLSearchParams(location.search).has("offline")){document.querySelectorAll('a[href="./classroom.html"]').forEach(a=>a.href="./classroom.html?offline=1")}
+
+function stopStageMusic(){stopMusic();musicEnabled=false;$('music-toggle').textContent='音乐：关 ♫';$('music-toggle').setAttribute('aria-pressed','false')}
+$('music-toggle').onclick=async()=>{const button=$('music-toggle');button.disabled=true;try{musicEnabled=await setMusic(!musicEnabled);button.textContent=musicEnabled?'音乐：开 ♫':'音乐：关 ♫';button.setAttribute('aria-pressed',musicEnabled)}catch{toast('此浏览器暂时不能播放配乐。')}finally{button.disabled=false}};
+$('music-volume').oninput=e=>musicVolume(Number(e.target.value)/100);
+$('music-mood').onchange=e=>musicMood(e.target.value);
+document.addEventListener('visibilitychange',()=>{if(document.hidden)stopStageMusic()});
