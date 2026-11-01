@@ -12,7 +12,7 @@ Serve the parent directory with `python3 -m http.server 8773`, then open `/shado
 - `images/`: video cover references and story stills for rehearsal.
 - `intro.html`: standalone shadow-puppetry introduction.
 
-Subtitles are prepared in advance; they are not live speech recognition. All five stories start at 00:00 and play through the complete video. Captions cover narration and dialogue to each ending; the crow video also includes its opening and vocabulary review. Music/silent pauses may have no text. Captions stay below the video in normal and fullscreen playback. Full videos are not included in this repository or website.
+Subtitles are prepared in advance; they are not live speech recognition. All five stories start at 00:00 and play through the complete video. Captions cover narration and dialogue to each ending; the crow video also includes its opening and vocabulary review. Each caption remains visible until the next one starts, including silent pauses; the final caption stays through the ending. Short narrator attributions in the race story share a caption with their dialogue to avoid rapid flashes. Captions stay below the video in normal and fullscreen playback. Full videos are not included in this repository or website.
 
 For offline use, select the same full source MP4 through “打开本地视频”. The private offline classroom package can also provide `media/race.mp4`, `crow.mp4`, `farmer.mp4`, `fox.mp4`, `nezha.mp4`; open with `?offline=1`. Browser speech depends on installed voices; NL-BE is preferred with same-language fallback. Student ending notes stay in localStorage.
 

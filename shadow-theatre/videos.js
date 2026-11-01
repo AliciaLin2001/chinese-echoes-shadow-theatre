@@ -7,7 +7,7 @@ export const videos = {
     "start": 0,
     "end": 278.268,
     "label": "完整故事 · 全程字幕",
-    "note": "完整原视频。字幕按原声时间显示；片头、停顿与片尾没有对白时不强加台词。",
+    "note": "完整原视频。每句字幕保留到下一句开始，便于阅读；最后一句保留在片尾。",
     "quizClip": [
       186.4,
       207
@@ -60,39 +60,21 @@ export const videos = {
       ],
       [
         35.49,
-        "你在这儿干什么？",
-        "Wat doe jij hier?",
-        "Nǐ zài zhèr gàn shénme?",
-        37.59,
-        "What are you doing here?",
-        "Qu’est-ce que tu fais ici ?"
-      ],
-      [
-        38.09,
-        "兔子嘲笑道。",
-        "spot de haas.",
-        "Tùzi cháoxiào dào.",
+        "“你在这儿干什么？”兔子嘲笑道。",
+        "“Wat doe jij hier?” spot de haas.",
+        "“Nǐ zài zhèr gàn shénme?” tùzi cháoxiào dào.",
         39.97,
-        "the hare mocks.",
-        "se moque le lièvre."
+        "“What are you doing here?” the hare mocks.",
+        "“Qu’est-ce que tu fais ici ?” se moque le lièvre."
       ],
       [
         40.75,
-        "你应该注意路上的其他人。",
-        "Je moet op de anderen op de weg letten.",
-        "Nǐ yīnggāi zhùyì lù shàng de qítā rén.",
-        45.17,
-        "You should watch out for others on the path.",
-        "Tu devrais faire attention aux autres sur le chemin."
-      ],
-      [
-        45.77,
-        "乌龟责备道。",
-        "zegt de schildpad streng.",
-        "Wūguī zébèi dào.",
+        "“你应该注意路上的其他人。”乌龟责备道。",
+        "“Je moet op de anderen op de weg letten” zegt de schildpad streng.",
+        "“Nǐ yīnggāi zhùyì lù shàng de qítā rén.” wūguī zébèi dào.",
         47.17,
-        "the tortoise scolds.",
-        "reproche la tortue."
+        "“You should watch out for others on the path” the tortoise scolds.",
+        "“Tu devrais faire attention aux autres sur le chemin” reproche la tortue."
       ],
       [
         47.73,
@@ -114,21 +96,12 @@ export const videos = {
       ],
       [
         57.95,
-        "你们两个在聊什么？",
-        "Waarover praten jullie twee?",
-        "Nǐmen liǎng gè zài liáo shénme?",
-        59.35,
-        "What are you two talking about?",
-        "De quoi parlez-vous tous les deux ?"
-      ],
-      [
-        59.95,
-        "狐狸问。",
-        "vraagt de vos.",
-        "Húli wèn.",
+        "“你们两个在聊什么？”狐狸问。",
+        "“Waarover praten jullie twee?” vraagt de vos.",
+        "“Nǐmen liǎng gè zài liáo shénme?” húli wèn.",
         60.63,
-        "asks the fox.",
-        "demande le renard."
+        "“What are you two talking about?” asks the fox.",
+        "“De quoi parlez-vous tous les deux ?” demande le renard."
       ],
       [
         61.95,
@@ -141,57 +114,30 @@ export const videos = {
       ],
       [
         65.73,
-        "你不同意吗，乌龟？",
-        "Vind je ook niet, schildpad?",
-        "Nǐ bù tóngyì ma, wūguī?",
-        67.51,
-        "Don't you agree, tortoise?",
-        "Tu n’es pas d’accord, tortue ?"
-      ],
-      [
-        68.15,
-        "兔子问。",
-        "vraagt de haas.",
-        "Tùzi wèn.",
+        "“你不同意吗，乌龟？”兔子问。",
+        "“Vind je ook niet, schildpad?” vraagt de haas.",
+        "“Nǐ bù tóngyì ma, wūguī?” tùzi wèn.",
         68.81,
-        "asks the hare.",
-        "demande le lièvre."
+        "“Don't you agree, tortoise?” asks the hare.",
+        "“Tu n’es pas d’accord, tortue ?” demande le lièvre."
       ],
       [
         69.55,
-        "这条路每个人都可以走。",
-        "Iedereen mag over deze weg lopen.",
-        "Zhè tiáo lù měi gè rén dōu kěyǐ zǒu.",
-        72.05,
-        "Everyone may use this path.",
-        "Tout le monde peut emprunter ce chemin."
-      ],
-      [
-        72.61,
-        "乌龟说。",
-        "zegt de schildpad.",
-        "Wūguī shuō.",
+        "“这条路每个人都可以走。”乌龟说。",
+        "“Iedereen mag over deze weg lopen” zegt de schildpad.",
+        "“Zhè tiáo lù měi gè rén dōu kěyǐ zǒu.” wūguī shuō.",
         73.29,
-        "says the tortoise.",
-        "dit la tortue."
+        "“Everyone may use this path” says the tortoise.",
+        "“Tout le monde peut emprunter ce chemin” dit la tortue."
       ],
       [
         74.43,
-        "我来告诉你。",
-        "Ik zal je eens iets vertellen.",
-        "Wǒ lái gàosu nǐ.",
-        75.91,
-        "Let me tell you something.",
-        "Je vais te dire quelque chose."
-      ],
-      [
-        76.33,
-        "兔子挑衅道。",
-        "daagt de haas hem uit.",
-        "Tùzi tiǎoxìn dào.",
+        "“我来告诉你。”兔子挑衅道。",
+        "“Ik zal je eens iets vertellen” daagt de haas hem uit.",
+        "“Wǒ lái gàosu nǐ.” tùzi tiǎoxìn dào.",
         77.87,
-        "the hare challenges him.",
-        "le provoque le lièvre."
+        "“Let me tell you something” the hare challenges him.",
+        "“Je vais te dire quelque chose” le provoque le lièvre."
       ],
       [
         78.55,
@@ -213,21 +159,12 @@ export const videos = {
       ],
       [
         89.94,
-        "好的。",
-        "Goed.",
-        "Hǎo de.",
-        90.44,
-        "All right.",
-        "D’accord."
-      ],
-      [
-        91.28,
-        "乌龟同意道。",
-        "stemt de schildpad in.",
-        "Wūguī tóngyì dào.",
+        "“好的。”乌龟同意道。",
+        "“Goed” stemt de schildpad in.",
+        "“Hǎo de.” wūguī tóngyì dào.",
         92.8,
-        "the tortoise agrees.",
-        "accepte la tortue."
+        "“All right” the tortoise agrees.",
+        "“D’accord” accepte la tortue."
       ],
       [
         93.84,
@@ -267,21 +204,12 @@ export const videos = {
       ],
       [
         110.3,
-        "现在取消比赛还来得及。",
-        "Je kunt de wedstrijd nu nog afzeggen.",
-        "Xiànzài qǔxiāo bǐsài hái láidejí.",
-        113.4,
-        "It's not too late to cancel the race.",
-        "Il est encore temps d’annuler la course."
-      ],
-      [
-        114.08,
-        "兔子小声对乌龟说。",
-        "fluistert de haas tegen de schildpad.",
-        "Tùzi xiǎoshēng duì wūguī shuō.",
+        "“现在取消比赛还来得及。”兔子小声对乌龟说。",
+        "“Je kunt de wedstrijd nu nog afzeggen” fluistert de haas tegen de schildpad.",
+        "“Xiànzài qǔxiāo bǐsài hái lái de jí.” tùzi xiǎoshēng duì wūguī shuō.",
         116.8,
-        "the hare whispers to the tortoise.",
-        "chuchote le lièvre à la tortue."
+        "“It's not too late to cancel the race” the hare whispers to the tortoise.",
+        "“Il est encore temps d’annuler la course” chuchote le lièvre à la tortue."
       ],
       [
         117.82,
@@ -294,21 +222,12 @@ export const videos = {
       ],
       [
         121.4,
-        "各位，预备，跑！",
-        "Iedereen klaar? Start!",
-        "Gèwèi, yùbèi, pǎo!",
-        124.66,
-        "Everyone, ready, go!",
-        "À vos marques, prêts, partez !"
-      ],
-      [
-        125.28,
-        "狐狸喊道。",
-        "roept de vos.",
-        "Húli hǎn dào.",
+        "“各位，预备，跑！”狐狸喊道。",
+        "“Iedereen klaar? Start!” roept de vos.",
+        "“Gèwèi, yùbèi, pǎo!” húli hǎn dào.",
         126.64,
-        "shouts the fox.",
-        "crie le renard."
+        "“Everyone, ready, go!” shouts the fox.",
+        "“À vos marques, prêts, partez !” crie le renard."
       ],
       [
         130.62,
@@ -330,21 +249,12 @@ export const videos = {
       ],
       [
         136.18,
-        "你怎么还在这儿？",
-        "Waarom ben je nog hier?",
-        "Nǐ zěnme hái zài zhèr?",
-        138.28,
-        "Why are you still here?",
-        "Pourquoi es-tu encore ici ?"
-      ],
-      [
-        138.9,
-        "他嘲笑道。",
-        "spot hij.",
-        "Tā cháoxiào dào.",
+        "“你怎么还在这儿？”他嘲笑道。",
+        "“Waarom ben je nog hier?” spot hij.",
+        "“Nǐ zěnme hái zài zhèr?” tā cháoxiào dào.",
         140.36,
-        "he mocks.",
-        "se moque-t-il."
+        "“Why are you still here?” he mocks.",
+        "“Pourquoi es-tu encore ici ?” se moque-t-il."
       ],
       [
         141.36,
@@ -402,21 +312,12 @@ export const videos = {
       ],
       [
         167.89,
-        "我的最爱！",
-        "Mijn lievelingseten!",
-        "Wǒ de zuì’ài!",
-        169.17,
-        "My favourite!",
-        "Ce que je préfère !"
-      ],
-      [
-        169.71,
-        "兔子说。",
-        "zegt de haas.",
-        "Tùzi shuō.",
+        "“我的最爱！”兔子说。",
+        "“Mijn lievelingseten!” zegt de haas.",
+        "“Wǒ de zuì’ài!” tùzi shuō.",
         170.45,
-        "says the hare.",
-        "dit le lièvre."
+        "“My favourite!” says the hare.",
+        "“Ce que je préfère !” dit le lièvre."
       ],
       [
         171.69,
@@ -429,21 +330,12 @@ export const videos = {
       ],
       [
         175.71,
-        "加油，乌龟！你能行！",
-        "Kom op, schildpad! Je kunt het!",
-        "Jiāyóu, wūguī! Nǐ néng xíng!",
-        178.51,
-        "Come on, tortoise! You can do it!",
-        "Allez, tortue ! Tu peux y arriver !"
-      ],
-      [
-        178.51,
-        "动物们鼓励道。",
-        "moedigen de dieren hem aan.",
-        "Dòngwùmen gǔlì dào.",
+        "“加油，乌龟！你能行！”动物们鼓励道。",
+        "“Kom op, schildpad! Je kunt het!” moedigen de dieren hem aan.",
+        "“Jiāyóu, wūguī! Nǐ néng xíng!” dòngwùmen gǔlì dào.",
         181.01,
-        "the animals cheer him on.",
-        "l’encouragent les animaux."
+        "“Come on, tortoise! You can do it!” the animals cheer him on.",
+        "“Allez, tortue ! Tu peux y arriver !” l’encouragent les animaux."
       ],
       [
         182.19,
@@ -456,21 +348,12 @@ export const videos = {
       ],
       [
         186.39,
-        "我饱了。",
-        "Ik heb genoeg gegeten.",
-        "Wǒ bǎo le.",
-        187.97,
-        "I'm full.",
-        "Je n’ai plus faim."
-      ],
-      [
-        188.37,
-        "他说。",
-        "zegt hij.",
-        "Tā shuō.",
+        "“我饱了。”他说。",
+        "“Ik heb genoeg gegeten” zegt hij.",
+        "“Wǒ bǎo le.” tā shuō.",
         188.91,
-        "he says.",
-        "dit-il."
+        "“I'm full” he says.",
+        "“Je n’ai plus faim” dit-il."
       ],
       [
         189.71,
@@ -582,21 +465,12 @@ export const videos = {
       ],
       [
         230.66,
-        "不可能！",
-        "Dat kan niet!",
-        "Bù kěnéng!",
-        231.18,
-        "Impossible!",
-        "Impossible !"
-      ],
-      [
-        231.84,
-        "兔子大喊。",
-        "roept de haas.",
-        "Tùzi dàhǎn.",
+        "“不可能！”兔子大喊。",
+        "“Dat kan niet!” roept de haas.",
+        "“Bù kěnéng!” tùzi dàhǎn.",
         233.26,
-        "shouts the hare.",
-        "crie le lièvre."
+        "“Impossible!” shouts the hare.",
+        "“Impossible !” crie le lièvre."
       ],
       [
         233.96,
@@ -611,7 +485,7 @@ export const videos = {
         235.52,
         "但是追不上乌龟。",
         "Maar hij kan de schildpad niet inhalen.",
-        "Dànshì zhuībùshàng wūguī.",
+        "Dànshì zhuī bu shàng wūguī.",
         238.38,
         "But he cannot catch up with the tortoise.",
         "Mais il ne peut pas rattraper la tortue."
@@ -1096,12 +970,12 @@ export const videos = {
       ],
       [
         36.15,
-        "太好了，今天有兔子肉吃喽！",
-        "Geweldig, vandaag eten we konijn!",
-        "Tài hǎo le, jīntiān yǒu tùzi ròu chī lou!",
+        "太好了，今晚有兔子肉吃了！",
+        "Geweldig, vanavond eten we konijn!",
+        "Tài hǎo le, jīnwǎn yǒu tùzi ròu chī le!",
         39.89,
-        "Great, today we can eat rabbit!",
-        "Super, aujourd’hui nous allons manger du lapin !"
+        "Great, tonight we can eat rabbit!",
+        "Super, ce soir nous allons manger du lapin !"
       ],
       [
         39.89,
@@ -1177,9 +1051,9 @@ export const videos = {
       ],
       [
         66.03,
-        "以后不用干活也有肉吃喽！",
+        "以后不干活儿也有肉吃了！",
         "Voortaan heb ik vlees zonder te werken!",
-        "Yǐhòu bù yòng gànhuó yě yǒu ròu chī lou!",
+        "Yǐhòu bù gànhuór yě yǒu ròu chī le!",
         69.87,
         "From now on, I'll have meat without working!",
         "Désormais, j’aurai de la viande sans travailler !"
@@ -1222,9 +1096,9 @@ export const videos = {
       ],
       [
         83.85,
-        "也没有等到一只兔子。",
+        "也没等到一只兔子。",
         "Maar er komt geen enkel konijn.",
-        "Yě méiyǒu děng dào yī zhī tùzi.",
+        "Yě méi děng dào yī zhī tùzi.",
         85.97,
         "But not a single rabbit comes.",
         "Mais aucun lapin ne vient."
@@ -1249,12 +1123,12 @@ export const videos = {
       ],
       [
         92.25,
-        "你说话呀！",
-        "Zeg toch iets!",
-        "Nǐ shuōhuà ya!",
+        "唉……",
+        "Ach…",
+        "Āi……",
         94.09,
-        "Say something!",
-        "Dis quelque chose !"
+        "Ah…",
+        "Ah…"
       ],
       [
         94.79,
@@ -1267,9 +1141,9 @@ export const videos = {
       ],
       [
         96.73,
-        "回到房间里睡觉去了。",
+        "回到房间睡觉去了。",
         "Hij gaat naar zijn kamer om te slapen.",
-        "Huí dào fángjiān lǐ shuìjiào qù le.",
+        "Huí dào fángjiān shuìjiào qù le.",
         98.79,
         "He goes back to his room to sleep.",
         "Il retourne dans sa chambre pour dormir."
@@ -1294,9 +1168,9 @@ export const videos = {
       ],
       [
         107.61,
-        "旁边的邻居看他的田里长满了杂草，",
+        "旁边的邻居看到他的田里长满了杂草，",
         "Een buur ziet dat zijn veld vol onkruid staat.",
-        "Pángbiān de línjū kàn tā de tián lǐ zhǎngmǎn le zácǎo,",
+        "Pángbiān de línjū kàndào tā de tián lǐ zhǎngmǎn le zácǎo,",
         111.69,
         "A neighbour sees that his field is full of weeds.",
         "Un voisin voit que son champ est plein de mauvaises herbes."
@@ -1330,9 +1204,9 @@ export const videos = {
       ],
       [
         118.61,
-        "没事，我不用除草，也不用收粮食。",
+        "没事儿，我不用除草，也不用收粮食。",
         "Geen probleem. Ik hoef niet te wieden of te oogsten.",
-        "Méishì, wǒ bù yòng chúcǎo, yě bù yòng shōu liángshi.",
+        "Méishìr, wǒ bù yòng chúcǎo, yě bù yòng shōu liángshi.",
         122.17,
         "It's fine. I don't need to weed or harvest.",
         "Ce n’est pas grave. Je n’ai pas besoin de désherber ni de récolter."
@@ -1436,19 +1310,19 @@ export const videos = {
         32.22,
         "那你倒是说说，是谁把你派下来的呀？",
         "Vertel dan eens: wie heeft jou gestuurd?",
-        "Nà nǐ dào shì shuō shuō, shì shéi bǎ nǐ pài xiàlái de ya?",
+        "Nà nǐ dào shì shuōshuo, shì shéi bǎ nǐ pài xiàlái de ya?",
         35.76,
         "Then tell me: who sent you here?",
         "Alors, dis-moi : qui t’a envoyé ici ?"
       ],
       [
         36.5,
-        "我？",
-        "Mij?",
-        "Wǒ?",
-        36.94,
-        "Me?",
-        "Moi ?"
+        "我……我……",
+        "Ik… ik…",
+        "Wǒ…… wǒ……",
+        40.8,
+        "I… I…",
+        "Moi… moi…"
       ],
       [
         41.77,
@@ -1461,27 +1335,18 @@ export const videos = {
       ],
       [
         46.07,
-        "嗯？",
-        "Hm?",
-        "Ń?",
-        46.51,
-        "Huh?",
-        "Hein ?"
-      ],
-      [
-        47.27,
-        "你有证据吗？",
-        "Heb je bewijs?",
-        "Nǐ yǒu zhèngjù ma?",
+        "哼，你有证据吗？",
+        "Hm, heb je bewijs?",
+        "Hēng, nǐ yǒu zhèngjù ma?",
         48.59,
-        "Do you have proof?",
-        "As-tu une preuve ?"
+        "Hmph, do you have proof?",
+        "Hum, as-tu une preuve ?"
       ],
       [
         50.07,
-        "当然有啊！山林里的动物看到我，都会害怕地躲起来呢。",
+        "当然有啊！森林里的动物看到我，都会害怕地躲起来呢。",
         "Natuurlijk! Als de dieren in het bos mij zien, verstoppen ze zich van angst.",
-        "Dāngrán yǒu a! Shānlín lǐ de dòngwù kàndào wǒ, dōu huì hàipà de duǒqǐlái ne.",
+        "Dāngrán yǒu a! Sēnlín lǐ de dòngwù kàndào wǒ, dōu huì hàipà de duǒqǐlái ne.",
         54.87,
         "Of course! When the forest animals see me, they hide in fear.",
         "Bien sûr ! Quand les animaux de la forêt me voient, ils se cachent de peur."
@@ -1497,9 +1362,9 @@ export const videos = {
       ],
       [
         60.45,
-        "那你跟着我去山林里走一走，看看他们怕不怕我。",
+        "那你跟着我去森林里走一走，看看他们怕不怕我。",
         "Loop dan met mij mee door het bos. Kijk of ze bang voor mij zijn.",
-        "Nà nǐ gēn zhe wǒ qù shānlín lǐ zǒu yi zǒu, kànkan tāmen pà bu pà wǒ.",
+        "Nà nǐ gēn zhe wǒ qù sēnlín lǐ zǒu yi zǒu, kànkan tāmen pà bu pà wǒ.",
         65.33,
         "Then walk with me through the forest and see if they fear me.",
         "Alors, viens marcher avec moi dans la forêt et vois s’ils ont peur de moi."
@@ -1684,7 +1549,7 @@ export const videos = {
         64.27,
         "这是乾坤圈，能变大变小，暴击万物。",
         "Dit is de magische ring. Hij kan groot of klein worden en alles hard raken.",
-        "Zhè shì Qiánkūnquān, néngbiàn dàbiàn xiǎo, bàojī wànwù.",
+        "Zhè shì Qiánkūnquān, néng biàn dà biàn xiǎo, bàojī wànwù.",
         71.25,
         "This is the magic ring. It can grow or shrink and strike anything.",
         "Voici l’anneau magique. Il peut grandir ou rétrécir et frapper toute chose."
@@ -1738,7 +1603,7 @@ export const videos = {
         99.53,
         "东海龙王不但不降一滴雨，",
         "De Drakenkoning van de Oostelijke Zee laat geen druppel regen vallen.",
-        "Dōnghǎilóngwáng bùdàn bù jiàng yī dī yǔ,",
+        "Dōnghǎi Lóngwáng bùdàn bù jiàng yī dī yǔ,",
         103.21,
         "The Dragon King of the Eastern Sea does not send a single drop of rain.",
         "Le Roi des dragons de la mer de l’Est ne fait pas tomber une goutte de pluie."
@@ -1783,7 +1648,7 @@ export const videos = {
         123.73,
         "震得东海龙王的水晶宫东摇西晃。",
         "Het kristallen paleis van de Drakenkoning schudt heen en weer.",
-        "Zhèn de dōnghǎilóngwáng de Shuǐjīnggōng dōng yáo xī huàng.",
+        "Zhèn de Dōnghǎi Lóngwáng de Shuǐjīnggōng dōng yáo xī huàng.",
         128.19,
         "The Dragon King's crystal palace shakes from side to side.",
         "Le palais de cristal du Roi des dragons tremble de tous les côtés."
@@ -1817,9 +1682,9 @@ export const videos = {
       ],
       [
         145.87,
-        "正好打住脑袋，",
+        "正好打中脑袋，",
         "De ring raakt Yasha op het hoofd.",
-        "Zhènghǎo dǎ zhù nǎodai,",
+        "Zhènghǎo dǎ zhòng nǎodai,",
         147.87,
         "It hits Yasha on the head.",
         "Il touche Yasha à la tête."
@@ -1918,7 +1783,7 @@ export const videos = {
         194.47,
         "把他裹得紧紧的，根本逃不掉。",
         "Het lint wikkelt zich zo strak om de prins dat hij niet kan ontsnappen.",
-        "Bǎ tā guǒ de jǐnjǐn de, gēnběn táobùdiào.",
+        "Bǎ tā guǒ de jǐnjǐn de, gēnběn táo bu diào.",
         198.39,
         "It wraps the prince so tightly that he cannot escape.",
         "Le ruban serre le prince si fort qu’il ne peut pas s’échapper."
@@ -1972,7 +1837,7 @@ export const videos = {
         222.04,
         "龙王大怒：敢对我儿扒皮抽筋！",
         "De Drakenkoning is woedend: je hebt mijn zoon gevild en zijn pees eruit gehaald!",
-        "Lóng wángdànù: Gǎn duì wǒ ér bāpí chōujīn!",
+        "Lóngwáng dà nù: Gǎn duì wǒ ér bāpí chōujīn!",
         227.68,
         "The Dragon King rages: you dared skin my son and pull out his tendon!",
         "Le Roi des dragons est furieux : tu as osé arracher la peau et le tendon de mon fils !"
@@ -2026,7 +1891,7 @@ export const videos = {
         248.65,
         "东海龙王请来了另外三位龙王，",
         "haalt de Drakenkoning van de Oostelijke Zee drie andere Drakenkoningen erbij.",
-        "Dōnghǎilóngwáng qǐnglái le lìngwài sān wèi Lóngwáng,",
+        "Dōnghǎi Lóngwáng qǐnglái le lìngwài sān wèi Lóngwáng,",
         253.05,
         "the Dragon King of the Eastern Sea calls in three other Dragon Kings.",
         "le Roi des dragons de la mer de l’Est fait venir trois autres Rois des dragons."
@@ -2089,7 +1954,7 @@ export const videos = {
         280.06,
         "有本事冲我一个人来！",
         "Kom dan alleen tegen mij vechten!",
-        "Yǒu běnshi chōng wǒ yī gè rén lái!",
+        "Yǒu běnshi chòng wǒ yī gè rén lái!",
         282.94,
         "Come and fight me alone, if you dare!",
         "Venez donc vous battre contre moi seul, si vous l’osez !"

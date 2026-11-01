@@ -1,4 +1,6 @@
-// Shared by online and offline playback. A cue is visible only in [start, end).
+// Keep the latest caption through pauses, until the next cue starts.
+// The final caption remains visible through the outro and after playback ends.
+// Recorded speech end times are retained in the data for editorial reference.
 export function captionAt(cues, time) {
   if (!Number.isFinite(time) || !cues.length) return { index: -1, previous: -1 };
   let low = 0, high = cues.length;
@@ -8,7 +10,7 @@ export function captionAt(cues, time) {
     else high = mid;
   }
   const previous = low - 1;
-  return { previous, index: previous >= 0 && time < cues[previous][4] ? previous : -1 };
+  return { previous, index: previous };
 }
 
 export function cueTranslation(cue, language) {

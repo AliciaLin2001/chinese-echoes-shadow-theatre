@@ -1,10 +1,10 @@
 import {quizPinyin} from './quiz-pinyin.js';
-import {captionAt,cueTranslation} from './caption-timeline.js';
+import {captionAt,cueTranslation} from './caption-timeline.js?v=2';
 import {setMusic,stopMusic,musicVolume,musicMood,musicDuck} from './music.js?v=2';
 import {expandScenes,sceneNames,scenePhotos} from './stage-scenes.js';
 import { feedbackSound } from './sounds.js';
 import { scripts } from './scripts-data.js';
-import { videos } from './videos.js?v=3';
+import { videos } from './videos.js?v=4';
 import { translations } from './languages.js';
 import { quizzes } from './quiz-data.js';
 import { addQuestions } from './quiz-more.js';
