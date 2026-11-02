@@ -1,11 +1,11 @@
 import {quizPinyin} from './quiz-pinyin.js';
 import {captionAt,cueTranslation} from './caption-timeline.js?v=2';
 import {setMusic,stopMusic,musicVolume,musicMood,musicDuck} from './music.js?v=2';
-import {expandScenes,sceneNames,scenePhotos} from './stage-scenes.js';
+import {expandScenes,sceneNames,scenePhotos} from './stage-scenes.js?v=2';
 import { feedbackSound } from './sounds.js';
-import { scripts } from './scripts-data.js';
-import { videos } from './videos.js?v=4';
-import { translations } from './languages.js';
+import { scripts } from './scripts-data.js?v=2';
+import { videos } from './videos.js?v=5';
+import { translations } from './languages.js?v=2';
 import { quizzes } from './quiz-data.js';
 import { addQuestions } from './quiz-more.js';
 addQuestions(quizzes);
@@ -52,7 +52,7 @@ $('roles').innerHTML=s.roles.map(r=>`<div class="role-card"><span>${r.zh}</span>
 $('video-shell').innerHTML=`<div id="player"></div><button class="load-video" id="load-video" aria-label="播放${s.title}中文视频"><img src="./images/${selected}-cover.jpg" alt="${s.title}视频封面"><span>▶ 播放中文故事</span></button>`;
 $('load-video').onclick=()=>loadVideo(pendingStart);$('youtube').href=new URLSearchParams(location.search).has('offline')?`./media/${selected}.mp4`:`https://www.youtube.com/watch?v=${v.id}`;$('source').textContent=`${v.publisher} · ${v.label} · YouTube 原视频播放器`;$('video-note').textContent=v.note;$('player-status').textContent='';$('speed').value='1';$('time').textContent=format(v.start);
 $('cues').innerHTML=v.cues.map((c,i)=>`<button class="cue-button" data-cue="${i}"><time>${format(c[0])}</time><span class="py">${esc(c[3]||'')}</span>${esc(c[1])}<span class="nl" lang="nl-BE">${esc(c[2])}</span></button>`).join('');setCue(0);paintCaption(captionAt(v.cues,0).index);pendingStart=0;
-$('role-filter').innerHTML='<option value="">全部角色 · Alle rollen</option>'+s.roles.map(r=>`<option value="${r.zh}">${r.zh} · ${r.nl}</option>`).join('');renderLines();$('idea').value=read(`ce-shadow-idea-${selected}`,'');$('adaptation-note').textContent=selected==='nezha'?'自编温和版：用现有哪吒与龙王影偶演出合作故事，可自由改编。':selected==='farmer'?'课堂轻松改编：兔子休息后离开，与原视频的结局细节不同。':selected==='crow'?'表演使用奶酪（小纸片），可替换成视频里的肉。':'';
+$('role-filter').innerHTML='<option value="">全部角色 · Alle rollen</option>'+s.roles.map(r=>`<option value="${r.zh}">${r.zh} · ${r.nl}</option>`).join('');renderLines();$('idea').value=read(`ce-shadow-idea-${selected}`,'');$('adaptation-note').textContent=selected==='nezha'?'自编温和版：用现有哪吒与龙王影偶演出合作故事，可自由改编。':selected==='farmer'?'课堂轻松改编：兔子休息后离开，与原视频的结局细节不同。':'';
 renderQuiz();$('quiz-answer').value=read(`ce-shadow-discussion-${selected}`,'');$('quiz-open').textContent=s.question;$('quiz-open-nl').textContent=s.questionNl;translate();mode(activeMode);history.replaceState(null,'',`#${selected}`)}
 $('stories').onclick=e=>{const b=e.target.closest('[data-story]');if(b){selected=b.dataset.story;render()}};
 $('cues').onclick=e=>{const b=e.target.closest('[data-cue]');if(b)seekCue(Number(b.dataset.cue))};

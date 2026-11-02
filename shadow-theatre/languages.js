@@ -51,9 +51,9 @@ export const translations = {
     "The crow is in the tree.",
     "Le corbeau est dans l'arbre."
   ],
-  "Ze heeft kaas in haar bek.": [
-    "She has cheese in her beak.",
-    "Il a du fromage dans le bec."
+  "Ze heeft vlees in haar bek.": [
+    "She has meat in her beak.",
+    "Il a de la viande dans le bec."
   ],
   "Ik heb zo veel honger!": [
     "I'm so hungry!",
@@ -79,13 +79,13 @@ export const translations = {
     "Caw, caw!",
     "Croa, croa !"
   ],
-  "Nu is de kaas van mij!": [
-    "Now the cheese is mine!",
-    "Maintenant, le fromage est à moi !"
+  "Nu is het vlees van mij!": [
+    "Now the meat is mine!",
+    "Maintenant, la viande est à moi !"
   ],
-  "O nee! Mijn kaas!": [
-    "Oh no! My cheese!",
-    "Oh non ! Mon fromage !"
+  "O nee! Mijn vlees!": [
+    "Oh no! My meat!",
+    "Oh non ! Ma viande !"
   ],
   "Wachten op een konijn": [
     "Waiting for a rabbit",
@@ -391,9 +391,9 @@ export const translations = {
     "The hare wakes up. Both animals nod.",
     "Le lièvre se réveille. Les deux animaux hochent la tête."
   ],
-  "De kraai heeft een stukje kaas. De vos wil het opeten. Wat zal hij zeggen?": [
-    "The crow has a piece of cheese. The fox wants it. What will he say?",
-    "Le corbeau a du fromage. Le renard veut le manger. Que va-t-il dire ?"
+  "De kraai heeft een stukje vlees. De vos wil het opeten. Wat zal hij zeggen?": [
+    "The crow has a piece of meat. The fox wants it. What will he say?",
+    "Le corbeau a un morceau de viande. Le renard veut le manger. Que va-t-il dire ?"
   ],
   "Wat zou jij doen als jij de kraai was?": [
     "What would you do if you were the crow?",

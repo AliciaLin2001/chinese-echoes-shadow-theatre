@@ -9,8 +9,8 @@ race:[
 crow:[
 ['狐狸','好香啊！','Hǎo xiāng a!','Dat ruikt lekker!','That smells delicious!','Ça sent bon !'],
 ['旁白','乌鸦低头看着狐狸。','Wūyā dītóu kànzhe húli.','De kraai kijkt naar de vos beneden.','The crow looks down at the fox.','Le corbeau regarde le renard en bas.'],
-['旁白','她忘了嘴里的奶酪。','Tā wàng le zuǐ lǐ de nǎilào.','Ze vergeet de kaas in haar bek.','She forgets the cheese in her beak.','Il oublie le fromage dans son bec.'],
-['旁白','奶酪掉到地上了。','Nǎilào diào dào dì shàng le.','De kaas valt op de grond.','The cheese falls to the ground.','Le fromage tombe par terre.'],
+['旁白','她忘了嘴里的肉。','Tā wàng le zuǐ lǐ de ròu.','Ze vergeet het vlees in haar bek.','She forgets the meat in her beak.','Il oublie la viande dans son bec.'],
+['旁白','肉掉到地上了。','Ròu diào dào dì shàng le.','Het vlees valt op de grond.','The meat falls to the ground.','La viande tombe par terre.'],
 ['乌鸦','下次我要先想一想。','Xià cì wǒ yào xiān xiǎng yi xiǎng.','Volgende keer denk ik eerst na.','Next time I will think first.','La prochaine fois, je réfléchirai d’abord.']],
 farmer:[
 ['农夫','种子需要水。','Zhǒngzi xūyào shuǐ.','De zaadjes hebben water nodig.','The seeds need water.','Les graines ont besoin d’eau.'],
@@ -31,7 +31,7 @@ nezha:[
 ['哪吒','我们让海浪小一点吧。','Wǒmen ràng hǎilàng xiǎo yīdiǎn ba.','Laten we de golven kleiner maken.','Let us make the waves smaller.','Faisons diminuer les vagues.'],
 ['龙王','大家一起保护大海。','Dàjiā yīqǐ bǎohù dàhǎi.','Samen zorgen we voor de zee.','Let us look after the sea together.','Prenons soin de la mer ensemble.']]
 };
-export const sceneNames={race:['森林里的相遇','比赛开始了','快与慢','悄悄向前走','谁到终点了'],crow:['树上的奶酪','狐狸的夸奖','你会唱歌吗','张开嘴巴','重新想一想'],farmer:['田里的工作','兔子来休息','一次偶然相遇','等啊等','重新开始工作'],fox:['森林里相遇','狐狸的主意','跟我走','动物们跑了','到底怕谁'],nezha:['来到海边','海浪变大了','龙王来了','一起想办法','保护大海']};
+export const sceneNames={race:['森林里的相遇','比赛开始了','快与慢','悄悄向前走','谁到终点了'],crow:['树上的肉','狐狸的夸奖','你会唱歌吗','张开嘴巴','重新想一想'],farmer:['田里的工作','兔子来休息','一次偶然相遇','等啊等','重新开始工作'],fox:['森林里相遇','狐狸的主意','跟我走','动物们跑了','到底怕谁'],nezha:['来到海边','海浪变大了','龙王来了','一起想办法','保护大海']};
 export const scenePhotos={race:[3,3,5,7,8],crow:[0,2,5,7,8],farmer:[0,2,4,6,9],fox:[0,2,4,6,8],nezha:[0,2,4,7,8]};
 export function expandScenes(scripts,translations){
  for(const [id,lines] of Object.entries(extra)){

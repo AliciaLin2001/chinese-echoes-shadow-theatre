@@ -21,20 +21,20 @@ export const scripts = {
   },
   crow: {
     title:'狐狸与乌鸦',nl:'De vos en de kraai',
-    summary:'乌鸦有一块奶酪。狐狸想吃，他会说什么？',
-    summaryNl:'De kraai heeft een stukje kaas. De vos wil het opeten. Wat zal hij zeggen?',
+    summary:'乌鸦有一块肉。狐狸想吃，他会说什么？',
+    summaryNl:'De kraai heeft een stukje vlees. De vos wil het opeten. Wat zal hij zeggen?',
     roles:[{zh:'狐狸',nl:'Vos',icon:'🦊'},{zh:'乌鸦',nl:'Kraai',icon:'🐦‍⬛'},{zh:'旁白',nl:'Verteller',icon:'🎙️'}],
     lines:[
       {role:'旁白',zh:'乌鸦站在树上。',py:'Wūyā zhàn zài shù shàng.',nl:'De kraai zit in de boom.',action:'乌鸦停在高处。',actionNl:'Zet de kraai hoog op het scherm.'},
-      {role:'旁白',zh:'她的嘴里有奶酪。',py:'Tā de zuǐ lǐ yǒu nǎilào.',nl:'Ze heeft kaas in haar bek.',action:'在乌鸦嘴边放一张小纸片。',actionNl:'Houd een klein stukje papier bij haar bek.'},
+      {role:'旁白',zh:'她的嘴里有肉。',py:'Tā de zuǐ lǐ yǒu ròu.',nl:'Ze heeft vlees in haar bek.',action:'在乌鸦嘴边放一张小纸片。',actionNl:'Houd een klein stukje papier bij haar bek.'},
       {role:'狐狸',zh:'我好饿啊！',py:'Wǒ hǎo è a!',nl:'Ik heb zo veel honger!',action:'狐狸走进来，看看乌鸦。',actionNl:'De vos komt op en kijkt naar de kraai.'},
       {role:'狐狸',zh:'乌鸦，你真漂亮！',py:'Wūyā, nǐ zhēn piàoliang!',nl:'Kraai, wat ben jij mooi!',action:'狐狸抬头。',actionNl:'De vos kijkt omhoog.'},
       {role:'旁白',zh:'乌鸦很高兴。',py:'Wūyā hěn gāoxìng.',nl:'De kraai is heel blij.',action:'乌鸦轻轻摆动。',actionNl:'Laat de kraai zachtjes bewegen.'},
       {role:'狐狸',zh:'你会唱歌吗？',py:'Nǐ huì chànggē ma?',nl:'Kan jij zingen?',action:'狐狸向前走一步。',actionNl:'De vos komt een stap dichterbij.'},
       {role:'狐狸',zh:'唱一首吧！',py:'Chàng yī shǒu ba!',nl:'Zing eens een liedje!',action:'狐狸等待。',actionNl:'De vos wacht.'},
       {role:'乌鸦',zh:'啊——啊——！',py:'Ā — ā —!',nl:'Kra — kra!',action:'乌鸦张嘴，纸片落下。',actionNl:'De kraai opent haar bek. Laat het papiertje vallen.'},
-      {role:'狐狸',zh:'奶酪是我的了！',py:'Nǎilào shì wǒ de le!',nl:'Nu is de kaas van mij!',action:'狐狸拿走纸片。',actionNl:'De vos neemt het papiertje mee.'},
-      {role:'乌鸦',zh:'哎呀！我的奶酪！',py:'Āiyā! Wǒ de nǎilào!',nl:'O nee! Mijn kaas!',action:'乌鸦向下看。',actionNl:'De kraai kijkt naar beneden.'}
+      {role:'狐狸',zh:'肉是我的了！',py:'Ròu shì wǒ de le!',nl:'Nu is het vlees van mij!',action:'狐狸拿走纸片。',actionNl:'De vos neemt het papiertje mee.'},
+      {role:'乌鸦',zh:'哎呀！我的肉！',py:'Āiyā! Wǒ de ròu!',nl:'O nee! Mijn vlees!',action:'乌鸦向下看。',actionNl:'De kraai kijkt naar beneden.'}
     ],
     question:'你是乌鸦，你会怎么做？',questionNl:'Wat zou jij doen als jij de kraai was?'
   },
