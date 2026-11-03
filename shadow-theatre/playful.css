@@ -28,3 +28,5 @@ main:not(.classroom)>.heading{flex-direction:row;align-items:center;justify-cont
 .stage-audio{display:flex;flex-direction:column;gap:7px}.stage-audio button{font-size:12px!important;padding:7px!important;min-width:36px}.stage-action .nl{display:block;font-size:11px;margin-top:3px;color:#afc0a6}
 
 .quiz-py{font-size:18px;line-height:1.5;color:#9e7442;margin:0 0 6px;font-weight:400}.quiz-options .quiz-py{display:block;font-size:16px;margin-bottom:3px}#quiz .quiz-card h3{margin-top:0}
+
+.camp-days{display:flex;flex-wrap:wrap;gap:20px;margin:0 0 22px;font-size:14px}.camp-days a{color:inherit;text-decoration:none}.camp-days [aria-current]{color:#af4c35;font-weight:700}.camp-days span{opacity:.5}

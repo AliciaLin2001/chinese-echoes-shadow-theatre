@@ -1,11 +1,46 @@
-# Chinese Echoes · 皮影小剧场
+# Chinese Echoes · 中文文化小剧场
 
-Chinese shadow-theatre classroom for ages 6–12, with pinyin and Dutch / French / English support.
+面向 6–12 岁孩子的中文文化课堂，按星期选择活动。简洁的图片卡片、视频、拼音和互动题，帮助不同语言的孩子一起参与。
 
-Live: https://chineseechoes.com/shadow-theatre/
+- [课堂入口](https://chineseechoes.com/camp/)
+- [星期一 · 皮影小剧场](https://chineseechoes.com/shadow-theatre/)
+- [星期二 · 舞龙小剧场](https://chineseechoes.com/dragon-theatre/)
 
-Run `python3 -m http.server 8773`, then open http://localhost:8773/shadow-theatre/ . No installation or API key required.
+星期三为待补充入口，没有预设课程。
 
-Includes five complete story players with full-length timed Chinese, pinyin and Dutch / French / English captions, an independent introduction page, 50 quiz questions with pinyin, original rehearsal scripts, and scene images for stage mode. Full source videos are not included. For source details, subtitle scope, offline video support, and licensing, see [shadow-theatre/README.md](shadow-theatre/README.md).
+## 星期一：皮影小剧场
 
-Code and original scripts: MIT. Third-party videos, their transcriptions and translations, stills, thumbnails and marks are excluded from the code license.
+五个故事，完整故事播放器，汉字、拼音及荷兰语 / 法语 / 英语字幕，50 道题、原创排练台词与分幕表演。详见 [皮影课程说明](shadow-theatre/README.md)。
+
+## 星期二：舞龙小剧场
+
+- 四个主题：认识中国龙、龙的故事、春节舞龙、年兽与红色。
+- 每个主题 12 道选择题，共 **48 道题**，含反馈音效、重试、知识卡片回看和全屏答题。
+- **6 个五分钟以内的 YouTube 视频**，以中文为主，另有舞龙实拍和英语动作示范。
+- 汉字和声调拼音，默认比利时荷兰语，可切换英语或仅中文；逐句朗读使用设备提供的语音。
+- 三种可自由选择的手工：旋转纸龙、纸环舞龙、创意龙身；材料和步骤都有译文。
+- 五个舞龙动作提示与可开关的鼓点。
+
+**星期二的视频下方是按时间显示的儿童简明字幕和观察提示，并非原视频逐字转录。** 它们帮助理解画面和课堂概念，不声称覆盖或准确翻译每一句原声。上一条提示会保留到下一条出现。视频与字幕可以一起全屏。
+
+## 本地使用
+
+无需安装依赖或提供 API 密钥。在仓库目录运行：
+
+```sh
+python3 -m http.server 8773
+```
+
+打开 <http://localhost:8773/camp/>。YouTube 播放需要网络；本仓库不包含原视频下载。语音种类取决于浏览器和设备。
+
+内容检查（Node.js）：
+
+```sh
+npm test
+```
+
+## 授权与素材
+
+代码及原创课堂文字使用 [MIT License](LICENSE)。**此许可不涵盖第三方视频、原视频转录和相应译文、截图、缩略图、学校标志，以及教师提供的 PPT 图片和手工参考照片。** 提供这些素材用于本课堂展示不意味着其版权被转让，重新发布或另作使用时须自行确认授权。
+
+舞龙素材出处见 [图片来源说明](dragon-theatre/images/README.md)。YouTube 片段保留原播放器和来源链接，不在本仓库重新分发视频文件。

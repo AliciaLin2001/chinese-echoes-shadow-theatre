@@ -1,0 +1,10 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {stat} from 'node:fs/promises';
+import {topics,quizzes} from '../dragon-theatre/data.js';
+import {videos,cueIndex} from '../dragon-theatre/videos.js';
+import {crafts} from '../dragon-theatre/crafts.js';
+const text=x=>{for(const lang of ['zh','py','nl','en'])assert.ok(x[lang]?.trim(),lang);assert.match(x.py,/[āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ]/)};
+test('four complete themes, 48 multilingual questions and valid review links',async()=>{assert.equal(topics.length,4);for(const topic of topics){assert.equal(quizzes[topic.id].length,12);text(topic.title);for(const c of topic.cards){text(c.text);await stat(new URL('../dragon-theatre/images/'+c.image,import.meta.url))}for(const q of quizzes[topic.id]){text(q.prompt);q.choices.forEach(text);assert.ok(q.choices[q.answer]);assert.ok(topic.cards[q.review])}for(const v of topic.videos)assert.ok(videos[v])}});
+test('six videos under five minutes, complete language fields and held captions',()=>{assert.equal(Object.keys(videos).length,6);for(const v of Object.values(videos)){assert.ok(v.duration<300);assert.match(v.id,/^[\w-]{11}$/);assert.equal(v.cues[0].at,0);v.cues.forEach((c,i)=>{text(c);assert.ok(c.at<v.duration);if(i)assert.ok(c.at>v.cues[i-1].at)});assert.equal(cueIndex(v.cues,v.duration),v.cues.length-1);assert.equal(cueIndex(v.cues,v.cues[1].at-.01),0)}});
+test('three selectable crafts with four translated steps',()=>{assert.equal(crafts.length,3);for(const c of crafts){text(c.title);text(c.materials);assert.equal(c.steps.length,4);c.steps.forEach(text)}});
